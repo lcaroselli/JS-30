@@ -19,6 +19,7 @@ const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb
 
 //step 1 - need an empty array to put our cities into
 //step 2 - fetch that data - fetch will return a promise
+  //Get data first, then add event listeners and html to display
 
 const cities = [];
 
@@ -58,8 +59,8 @@ function displayMatches() {
 const searchInput = document.querySelector('.search');
 const suggestions = document.querySelector('.suggestions');
 
-searchInput.addEventListener('change', displayMatches);
-searchInput.addEventListener('keyup', displayMatches);
+searchInput.addEventListener('change', displayMatches); //fire on change
+searchInput.addEventListener('keyup', displayMatches); //fire on keyup
 
 </script>
   </body>
