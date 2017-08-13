@@ -40,6 +40,27 @@
 <button></button>
 <script>
 
+const divs = document.querySelectorAll('div');
+const button = document.querySelector('button');
+
+function logText(e) {
+  console.log(this.classList.value);
+  //clicking on any of them will log all their classList.values; triggering event on all of them when you click on one of them
+  //bubbling will ripple all the way out
+  // e.stopPropagation(); // stop bubbling; don't trigger on parents; stop bubbling this event up
+}
+
+divs.forEach(div => div.addEventListener('click', logText, {
+  capture: false, //captures all those events; ripples down from where you clicked; then bubbles up
+  once: true //listens for a click once and then unbinds itself; will reset on refresh
+}));
+
+button.addEventListener('click', () => {
+  console.log('Click!!!');
+}, {
+  once: true
+});
+
 </script>
 </body>
 </html>
