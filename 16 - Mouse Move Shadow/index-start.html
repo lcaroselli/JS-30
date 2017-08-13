@@ -35,6 +35,52 @@
   </style>
 
 <script>
+  //text-shadow moves depending on where your mouse is
+    //listening for a mouse move event on the hero
+    //and when that changes we figure out how far and where to put that text shadow
+
+  //step 1 - grab the hero and the text inside of that hero
+  const hero = document.querySelector('.hero');
+  const heroText = document.querySelector('h1');
+
+  //step 2 - create a function that will pass in the event
+
+  function heroTextShadow(e) {
+    //first, need the width and the height of the thing we have hovered over, which is the hero
+      // const width = hero.offsetWidth;
+      // const height = hero.offsetHeight;
+    //USING DESTRUCTURING:
+    const {offsetWidth: width, offsetHeight: height} = hero;
+
+    //second, need the information about where the person's cursor was
+    let {offsetX: x, offsetY: y } = e;
+      //getting the x and y from the event
+      //same as e.offsetX and e.offsetY
+
+    //this is the hero div, e.target is the h1
+    if (!this === e.target){
+      x = x + e.target.offsetLeft;
+      y = y + e.target.offsetTop;
+      //if these are not the same thing
+      //if someone hovers to the top left of the hero, re-assign values
+    }
+
+    //how much text shadow to add?
+    const walk = 100; //100px
+    const xWalk = Math.round((x / width * walk) - (walk / 2));
+    const yWalk = Math.round((y / height * walk) - (walk / 2));
+
+    text.style.textShadow = `
+      ${xWalk}px ${yWalk}px 0 rgba(255,0,255,0.7),
+      ${xWalk * -1}px ${yWalk}px 0 rgba(0,255,255,0.7),
+      ${yWalk}px ${xWalk * -1}px 0 rgba(0,255,0,0.7),
+      ${yWalk * -1}px ${xWalk}px 0 rgba(0,0,255,0.7)
+    `;
+  }
+
+  //step 3 - add event listener to hero that will listen for a mousemove and then run the heroTextShadow function on that event
+
+  hero.addEventListener('mousemove', heroTextShadow);
 </script>
 </body>
 </html>
