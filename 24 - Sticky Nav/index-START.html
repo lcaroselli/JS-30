@@ -54,6 +54,24 @@
   </div>
 
 <script>
+//fixing a nav when you scroll to it
+const nav = document.querySelector('#main');
+let topOfNav = nav.offsetTop; //.offsetTop returns the distance of the current element relative to the top of the offsetParent node.
+
+function fixNavBar() {
+  // console.log(topOfNav, window.scrollY);
+    //when these two meet, at that point, we want to make that nav fixed
+  if(window.scrollY >= topOfNav) {
+    document.body.style.paddingTop = nav.offsetHeight + 'px';
+    document.body.classList.add('fixed-nav'); //when the body has a class of fixed-nav, the nav is fixed. When this is true, pop a class on the body (so you can target any children)
+  } else {
+    document.body.classList.remove('fixed-nav'); //else, don't have that classlist
+    document.body.style.paddingTop = 0;
+  }
+}
+
+window.addEventListener('scroll', fixNavBar);
+
 
 </script>
 
